@@ -9,10 +9,8 @@
 // API_KEY is stored as an environment variable. Add the below to your .zshrc or .bashrc file:
 // export D_ID_API_KEY=your_api:key_here
 
-
 // Import required libraries
 const https = require('https');
-
 
 // Set up the request
 const options = {

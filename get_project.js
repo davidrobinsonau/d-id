@@ -1,4 +1,4 @@
-// GET d-id studio created project details - deep dive to get additional information on a generated project and understand the avatars used.
+// GET d-id studio created project details - deep dive to get additional information on a generated project and understand the avatars used.s
 // This script will call the API to get the list of actors and display on screen.
 
 // API_KEY is stored as an environment variable. Add the below to your .zshrc or .bashrc file:

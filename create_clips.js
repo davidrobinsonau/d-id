@@ -1,21 +1,11 @@
-// POST https://docs.d-id.com/reference/createtalk
-// This script will call the API to create a talk.
-//
-// Example output:
-/* {
-    id: 'tlk_3M7VK8w1H3yTj_20ZKt',
-    created_at: '2023-10-23T03:00:14.699Z',
-    created_by: 'auth0|6442eaa48',
-    status: 'created',
-    object: 'talk'
-  }
-*/
+// https://docs.d-id.com/reference/overview-2
+// Use the premium presenters to create an avatar clip
 
 // API_KEY is stored as an environment variable. Add the below to your .zshrc or .bashrc file:
 // export D_ID_API_KEY=your_api:key_here
 
+// node ./create_clips.js
 
-// Use get_talks.js to see the results and to confirm its processing.
 
 function send_api_request(_text) {
     // Set up the request
@@ -30,7 +20,14 @@ function send_api_request(_text) {
             input: _text,
         },
         config: { result_format: 'mp4' },
-        source_url: "https://create-images-results.d-id.com/api_docs/assets/amy.png",
+        //presenter_config: { crop: { type: 'rectangle',"rectangle": {
+        // "bottom": 1,
+        // "right": 1,
+        // "left": 1,
+        // "top": 1
+        //    }
+        presenter_id: "amy-Aq6OmGZnMt",
+        driver_id: "Vcq0R4a8F0"
     });
 
     const options = {
@@ -44,21 +41,21 @@ function send_api_request(_text) {
     };
 
     // Send the request
-    fetch('https://api.d-id.com/talks', options).then((response) => response.json())
-        .then((json) => talks_response(json))
+    fetch('https://api.d-id.com/clips', options).then((response) => response.json())
+        .then((json) => console.log(json))
         .catch(error => {
             console.log(error)
         })
 
+    // Error received:
+    // {
+    //  kind: 'PermissionError',
+    //  description: 'user has no permission for clips:write'
+    // }
+    // Sent support request in - tried changing Auth to confirm its correct and received "{ message: 'Unauthorized' }"
+    // Answer - I needed to upgrade plan to premium to use this endpoint.
+
 }
 
-// Process the response and get the ID
-function talks_response(json_output) {
-    console.log(json_output);
-    console.log("Talk ID: " + json_output.id);
-    // Need to monitor this Talk ID to see when its ready.
-
-
-}
 
 send_api_request("This is a test");
